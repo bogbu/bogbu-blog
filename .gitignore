@@ -9,5 +9,6 @@ node_modules
 !.env.example
 .vercel
 .output
+pnpm-lock.yaml
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

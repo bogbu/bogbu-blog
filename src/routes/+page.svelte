@@ -1,24 +1,12 @@
 <script lang="ts">
-	import {supabase} from "$lib/supabase";
+	import {getUser, google} from "$lib/auth";
+	import UserStore from "../store/user";
 	import type {User} from "@supabase/supabase-js";
-	const google = async () => {
-		await supabase.auth.signInWithOAuth({
-			provider: 'google',
-			options: {
-				queryParams: {
-					access_type: 'offline',
-					prompt: 'consent',
-				},
-			},
-		});
-	}
-	let user:User;
-	const getUser = async () => {
-		const {data, error} = await supabase.auth.getUser();
+	let user : User;
+	UserStore.subscribe(value => {
+		user = value;
+	})
 
-		if(data.user) user = data.user;
-		console.log(data,"error")
-	}
 </script>
 
 <svelte:head>
@@ -37,7 +25,7 @@
 		get user
 	</button>
 	{#if user}
-		<img src={user.user_metadata.avatar_url} alt="user.user_metadata.avatar_url"/>
+		<img src={user.user_metadata.avatar_url} alt=""/>
 	{/if}
 </section>
 

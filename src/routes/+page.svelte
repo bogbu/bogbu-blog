@@ -1,5 +1,16 @@
-<script>
-
+<script lang="ts">
+	import {supabase} from "$lib/supabase";
+	const google = async () => {
+		await supabase.auth.signInWithOAuth({
+			provider: 'google',
+			options: {
+				queryParams: {
+					access_type: 'offline',
+					prompt: 'consent',
+				},
+			},
+		});
+	}
 </script>
 
 <svelte:head>
@@ -11,6 +22,9 @@
 	Test
 	asdasdasd
 	테스트
+	<button on:click={google}>
+		google login
+	</button>
 
 </section>
 

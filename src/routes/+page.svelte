@@ -15,18 +15,13 @@
 </svelte:head>
 
 <section>
-	Test
-	asdasdasd
-	테스트
 	<button on:click={google}>
 		google login
 	</button>
 	<button on:click={getUser}>
 		get user
 	</button>
-	{#if user}
-		<img src={user.user_metadata.avatar_url} alt=""/>
-	{/if}
+	<img src={user.user_metadata.avatar_url} alt=""/>
 </section>
 
 <style>

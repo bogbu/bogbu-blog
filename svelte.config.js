@@ -16,7 +16,12 @@ const config = {
 		env: {
 			dir: process.cwd(),
 			publicPrefix: 'PUBLIC_'
-		}
+		},
+		vite: {
+			define: {
+				'process.env': process.env,
+			},
+		},
 	}
 };
 

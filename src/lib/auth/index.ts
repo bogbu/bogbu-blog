@@ -9,6 +9,7 @@ export const google = async () => {
                 access_type: 'offline',
                 prompt: 'consent',
             },
+            redirectTo : import.meta.env.VITE_PUBLIC_GOOGLE_REDIRECT_URL
         },
     });
 }

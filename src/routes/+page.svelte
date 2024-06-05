@@ -1,6 +1,5 @@
 <script lang="ts">
-
-
+import WindowFrame from "./_component/WindowFrame.svelte";
 </script>
 
 <svelte:head>
@@ -9,7 +8,9 @@
 </svelte:head>
 
 <section>
-
+	<WindowFrame>
+		tesrtsdad
+	</WindowFrame>
 
 </section>
 

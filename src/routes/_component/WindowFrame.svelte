@@ -33,12 +33,21 @@
     .window--frame__header {
       display: flex;
       justify-content: flex-end;
+      background: greenyellow;
+      border-bottom: 2px solid #000;
+      padding: 3px;
+      box-sizing: border-box;
     }
 
     .window--frame__content {
+      max-height: 600px;
       &.none {
         transition: 0.2s;
-        height: 0;
+        max-height: 0;
+        & + .window--frame__header {
+          background: #000;
+          border-bottom : none;
+        }
       }
     }
 
@@ -46,6 +55,9 @@
       border: none;
       background: transparent;
       cursor: pointer;
+    }
+    &.none {
+      display: none;
     }
   }
 </style>

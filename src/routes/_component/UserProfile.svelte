@@ -7,7 +7,6 @@
     let user: User;
     UserStore.subscribe(value => {
         user = value;
-        console.log(value, "user");
     })
 </script>
 

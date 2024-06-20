@@ -1,7 +1,12 @@
-<script>
+<script lang="ts">
 	import Header from './_component/Header.svelte';
 	import './styles.css';
 	import '../lib/font/font.css';
+	import {onMount} from "svelte";
+	import {getUser} from "$lib/auth";
+	onMount(() => {
+		getUser();
+	})
 </script>
 
 <div class="app">

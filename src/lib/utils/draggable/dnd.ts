@@ -1,9 +1,13 @@
 import type {DraggableType} from "$lib/types/Draggable";
 
-
+let item: string ;
+const reset = () => {
+    item = "";
+}
 export const dragStart = ({currentTarget, dataTransfer}:DraggableType) => {
-    console.log(currentTarget, dataTransfer , 'dragStart event');
+    item = currentTarget.innerHTML;
 }
 export const drop = ({currentTarget, dataTransfer}:DraggableType) => {
-    console.log(currentTarget, dataTransfer , 'drop event');
+    currentTarget.style.backgroundColor = "yellow";
+    currentTarget.innerHTML = item;
 }

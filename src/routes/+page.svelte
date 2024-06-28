@@ -3,7 +3,10 @@
     import WindowFrame from "./_component/WindowFrame.svelte";
     import DragStart from "$lib/utils/draggable/DragStart.svelte";
     import {dragStart, drop} from "$lib/utils/draggable/dnd";
-
+    import {getPost} from "$lib/post";
+    import type {Posts} from "$lib/types/Posts";
+    import {onMount} from "svelte";
+    let posts : Posts[];
     const hovering = (e: { currentTarget: (EventTarget & HTMLElement) }) => {
         console.log(e, "hovering");
         e.currentTarget.style.backgroundColor = "red";
@@ -12,6 +15,13 @@
         console.log(e, "hoveringOut");
         e.currentTarget.style.backgroundColor = "transparent";
     }
+    const getPosts = async () => {
+        const res = await getPost();
+        // posts
+    }
+    onMount(() => {
+        getPosts();
+    });
 </script>
 
 <svelte:head>
@@ -35,6 +45,11 @@
         <DragStart>
             <WindowFrame>
                 test1
+            </WindowFrame>
+        </DragStart>
+        <DragStart>
+            <WindowFrame>
+                test2
             </WindowFrame>
         </DragStart>
         <DragStart>

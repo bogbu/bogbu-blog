@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import type {User} from "@supabase/supabase-js";
 
-const UserStore = writable<User>({
+export const resetUser = {
     action_link: "",
     app_metadata: {},
     aud: "",
@@ -26,6 +26,7 @@ const UserStore = writable<User>({
     updated_at: "",
     user_metadata: {}
 
-});
+}
+const UserStore = writable<User>(resetUser);
 
 export default UserStore;

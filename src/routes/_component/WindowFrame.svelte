@@ -43,6 +43,9 @@
 
       .window--frame__header__button {
         padding-bottom: 5px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 5px;
       }
     }
 
@@ -53,11 +56,12 @@
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
       overflow: hidden;
-        padding: 10px;
+      padding: 10px;
+      transition: 0.2s;
       &.none {
-        transition: 0.2s;
+        transition: 0.1s;
         max-height: 0;
-
+        padding: 0;
         & + .window--frame__header {
           background: #000;
           border-bottom: none;

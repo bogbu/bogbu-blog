@@ -30,7 +30,7 @@
 </svelte:head>
 
 <section class="flex">
-    <article class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-[80%]">
+    <article class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
         {#each mockList as item, i}
             <div draggable="true" role="listitem" class="bg-white shadow-md p-4 min-h-[250px] rounded-lg"
                  on:dragover={(e)=>{e.preventDefault();  "return false"}} on:dragleave={(e)=>{e.preventDefault; hoveringOut(e)}}
@@ -40,23 +40,6 @@
                 {@html item}
             </div>
         {/each}
-    </article>
-    <article class="flex-1">
-        <DragStart>
-            <WindowFrame>
-                test1
-            </WindowFrame>
-        </DragStart>
-        <DragStart>
-            <WindowFrame>
-                test2
-            </WindowFrame>
-        </DragStart>
-        <DragStart>
-            <WindowFrame>
-                test2
-            </WindowFrame>
-        </DragStart>
     </article>
 </section>
 

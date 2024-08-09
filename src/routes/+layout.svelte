@@ -10,12 +10,11 @@
 	})
 </script>
 
-<div class="app md:grid-cols-1 lg:block flex">
+<div class="app flex-col md:flex-row flex">
+	<Header />
 	<main>
 		<slot />
 	</main>
-	<Header />
-
 </div>
 
 <style lang="scss">

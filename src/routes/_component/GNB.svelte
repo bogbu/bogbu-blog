@@ -12,11 +12,11 @@
         },
         {
             name: "About",
-            url: "/about"
+            url: "#"
         },
         {
             name: "Contact",
-            url: "/contact"
+            url: "#"
         }
     ];
 </script>

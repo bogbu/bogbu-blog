@@ -1,3 +1,3 @@
 import {writable} from "svelte/store";
 
-export const color = writable<string>("#000000");
+export const colorStore = writable<string>("#fff");

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import {colorStore} from "$lib/store/colorStore";
+
     let content_option = "";
     let className = "";
     export let onHandleClosed = () => {
@@ -13,7 +15,7 @@
 </script>
 
 <section class={`window--frame ${className}`}>
-    <div class="window--frame__header">
+    <div class="window--frame__header" style="background: {$colorStore}">
         <div class="window--frame__header__button">
             <button on:click={onHandleMinimization} class="minus-box"></button>
             <button on:click={onHandleMaximize} class="square-box"></button>
@@ -27,6 +29,7 @@
 
 <style lang="scss">
   @import '../../lib/color/color.scss';
+
   .window--frame {
     border: 2px solid #000;
     border-radius: 10px;
@@ -38,7 +41,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      background: $secondary-color;
+      //background: $secondary-color;
       padding: 5px;
       box-sizing: border-box;
 
@@ -48,6 +51,7 @@
         justify-content: flex-end;
         gap: 5px;
       }
+
       .minus-box {
         position: relative;
         width: 20px;
@@ -68,6 +72,7 @@
           transform: translateY(-50%);
         }
       }
+
       .square-box {
         position: relative;
         background: transparent;
@@ -85,6 +90,7 @@
           transform: translate(-50%, -50%);
         }
       }
+
       .cross-box {
         position: relative;
         width: 20px;
@@ -124,10 +130,12 @@
       overflow-x: hidden;
       padding: 10px;
       transition: 0.2s;
+
       &.none {
         transition: 0.1s;
         max-height: 0;
         padding: 0;
+
         & + .window--frame__header {
           background: #000;
           border-bottom: none;

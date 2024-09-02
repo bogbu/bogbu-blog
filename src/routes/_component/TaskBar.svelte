@@ -9,17 +9,21 @@
     } from "$lib/store/showContentStore";
     import StartMenu from "./StartMenu.svelte";
     import Clock from "./clock/Clock.svelte";
+    import {colorStore} from "$lib/store/colorStore";
 
     let showStartMenu = false;
-    let color = "#000000";
-
+    let color = "#fff";
+    colorStore.subscribe(value => {
+        color = value;
+    });
     const toggleStartMenu = () => {
         showStartMenu = !showStartMenu;
     }
+    $: colorStore.set(color);
 </script>
 
 <div class="taskbar">
-    <button class="start-button" on:click={toggleStartMenu} class:active={showStartMenu}>
+    <button class="start-button" on:click={toggleStartMenu} style="background-color: {showStartMenu ? color : '#c0c0c0'};">
         <svg class="windows-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
             <path fill="#F25022" d="M6 6h18v18H6z"/>
             <path fill="#7FBA00" d="M24 6h18v18H24z"/>

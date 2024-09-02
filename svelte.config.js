@@ -11,7 +11,18 @@ const config = {
 		alias: {
 			$lib: './src/lib'
 		},
-		adapter: adapter(),
+		adapter: adapter({
+			// default options are shown
+			pages: 'build',
+			assets: 'build',
+			fallback: null,
+			precompress: false,
+			strict: true
+		}),
+		paths: {
+			base: '',
+			assets: ''
+		},
 		env: {
 			dir: process.cwd(),
 			publicPrefix: 'PUBLIC_'

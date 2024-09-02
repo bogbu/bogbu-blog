@@ -1,8 +1,9 @@
 <script lang="ts">
-    import UserStore from "../../store/user";
+    import UserStore from "$lib/store/user";
     import type {User} from "@supabase/supabase-js";
     import {google, logout} from "$lib/auth";
     import WindowFrame from "./WindowFrame.svelte";
+    import {toggleShowProfile} from "$lib/store/showContentStore";
 
     let user: User;
     UserStore.subscribe(value => {
@@ -10,7 +11,7 @@
     })
 </script>
 
-<WindowFrame>
+<WindowFrame onHandleClosed={toggleShowProfile}>
     <article class="user--profile">
         {#if user.id === ""}
             <p>로그인이 필요합니다.</p>

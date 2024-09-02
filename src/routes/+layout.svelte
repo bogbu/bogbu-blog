@@ -5,16 +5,20 @@
     import {onMount} from "svelte";
     import {getUser} from "$lib/auth";
     import TaskBar from "./_component/TaskBar.svelte";
+    import {showContent} from "$lib/store/showContentStore";
 
     onMount(() => {
         getUser();
-    })
+    });
 </script>
 
 <div class="app flex-col md:flex-row flex gap-3 relative p-3 md:p-10">
+
     <Header/>
     <main>
-        <slot/>
+        {#if $showContent}
+            <slot/>
+        {/if}
     </main>
     <TaskBar/>
 </div>
@@ -29,7 +33,7 @@
 
     main {
       flex: 1;
-		padding-bottom: 40px;
+      padding-bottom: 40px;
     }
   }
 

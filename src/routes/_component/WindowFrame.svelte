@@ -1,9 +1,8 @@
 <script lang="ts">
-    let header_option = "";
     let content_option = "";
     let className = "";
-    const onHandleClosed = () => {
-        header_option = 'none';
+    export let onHandleClosed = () => {
+        // header_option = 'none';
     }
     const onHandleMaximize = () => {
         content_option = '';
@@ -13,7 +12,7 @@
     }
 </script>
 
-<section class={`window--frame ${header_option} ${className}`}>
+<section class={`window--frame ${className}`}>
     <div class="window--frame__header">
         <div class="window--frame__header__button">
             <button on:click={onHandleMinimization} class="minus-box"></button>

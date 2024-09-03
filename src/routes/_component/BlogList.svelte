@@ -34,7 +34,7 @@
     display: flex;
     gap: 5px;
     justify-content: space-between;
-
+    transition: 0.2s;
     &:hover {
       background-color: #f0f0f0;
     }

@@ -4,6 +4,7 @@
     import {onMount} from "svelte";
     import {getPost} from "$lib/post";
     import BlogList from "./_component/BlogList.svelte";
+    import SNSList from "./_component/SNSList.svelte";
 
     let posts: Posts[];
     let isLoading: boolean = false;
@@ -23,11 +24,16 @@
     <meta name="description" content="Svelte demo app"/>
 </svelte:head>
 <WindowFrameLayout loading={isLoading}>
-    {#if posts}
-        <BlogList {posts}/>
-    {:else}
-        <p>loading...</p>
-    {/if}
+    <div class="w-full gap-3 flex items-start justify-between">
+        <div class="flex-1">
+            <SNSList/>
+        </div>
+        {#if posts}
+            <BlogList {posts}/>
+        {:else}
+            <p>loading...</p>
+        {/if}
+    </div>
 </WindowFrameLayout>
 
 <style lang="scss">

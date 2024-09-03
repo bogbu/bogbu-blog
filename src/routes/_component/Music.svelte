@@ -162,7 +162,7 @@
         <input style=" background: {$colorStore}; --moz-range-thumb-background: {$colorStore}; --webkit-slider-thumb-background: {$colorStore}"
                class="range-slider" type="range" min="0" max={duration} value={currentTime} on:input={seekTrack}/>
     </div>
-    <div>
+    <div class="flex items-center gap-1">
         <label for="volume">Volume</label>
         <input class="range-slider"
                style=" background: {$colorStore};  --moz-range-thumb-background: {$colorStore}; --webkit-slider-thumb-background: {$colorStore}"
@@ -174,7 +174,7 @@
 
 <style lang="scss">
   .music-list {
-    height: 90px;
+    height: 120px;
     overflow: hidden;
     overflow-y: auto;
     display: flex;
@@ -189,6 +189,7 @@
       //overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      transition: 0.2s;
 
       button {
         //margin-top: 5px;

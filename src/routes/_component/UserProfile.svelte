@@ -23,7 +23,7 @@
                 <img src={user.user_metadata.avatar_url} alt=""/>
             </div>
             <p>{user.user_metadata.name} 님</p>
-            <p>{user.email}</p>
+<!--            <p>{user.email}</p>-->
             <button on:click={logout}>
                 로그아웃
             </button>

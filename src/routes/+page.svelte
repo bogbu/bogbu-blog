@@ -5,15 +5,11 @@
     import {onMount} from "svelte";
     import {showContent, toggleShowContent} from "$lib/store/showContentStore";
     import IsLoading from "./_component/IsLoading.svelte";
-
     let posts: Posts[];
     const getPosts = async () => {
         // const res = await getPost();
         // posts
     }
-    onMount(() => {
-        getPosts();
-    });
 
 </script>
 

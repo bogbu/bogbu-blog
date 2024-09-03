@@ -22,6 +22,9 @@
     onMount(async () => {
         try {
             musicFiles = await fetchFiles('music');
+            if (musicFiles.length > 0) {
+                playTrack(musicFiles[0], 0);
+            }
         } catch (error) {
             console.error('Error fetching music files:', error);
         }
@@ -156,11 +159,16 @@
     </div>
     <div>
         <span>{formatTime(currentTime)} / {formatTime(duration)}</span>
-        <input type="range" min="0" max={duration} value={currentTime} on:input={seekTrack}/>
+        <input style=" background: {$colorStore}; --moz-range-thumb-background: {$colorStore}; --webkit-slider-thumb-background: {$colorStore}"
+               class="range-slider" type="range" min="0" max={duration} value={currentTime} on:input={seekTrack}/>
     </div>
     <div>
         <label for="volume">Volume</label>
-        <input id="volume" type="range" min="0" max="1" step="0.01" value={volume} on:input={changeVolume}/>
+        <input class="range-slider"
+               style=" background: {$colorStore};  --moz-range-thumb-background: {$colorStore}; --webkit-slider-thumb-background: {$colorStore}"
+               id="volume" type="range"
+               min="0" max="1" step="0.01" value={volume}
+               on:input={changeVolume}/>
     </div>
 </div>
 
@@ -175,12 +183,13 @@
     align-items: center;
 
     .music-file {
-      width:100%;
+      width: 100%;
       height: 20px;
       text-align: center;
       //overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
       button {
         //margin-top: 5px;
       }
@@ -192,6 +201,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    outline: none;
 
     button {
       margin-bottom: 10px;
@@ -199,6 +209,41 @@
 
     input[type="range"] {
       width: 100%;
+    }
+
+    .range-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      background: #ddd;
+      outline: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      border: 1px solid #000;
+      border-radius: 10px;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 8px;
+        height: 15px;
+        //background: #4CAF50;
+        cursor: pointer;
+        border-radius: 0;
+        //border-radius: 50%;
+      }
+
+      &::-moz-range-thumb {
+        width: 8px;
+        height: 15px;
+        //background: #4CAF50;
+        cursor: pointer;
+        //border-radius: 50%;
+      }
     }
   }
 </style>

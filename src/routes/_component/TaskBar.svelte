@@ -15,16 +15,22 @@
 
     let showStartMenu = false;
     let color = "#fff";
-    colorStore.subscribe(value => {
-        color = value;
-    });
     const toggleStartMenu = () => {
         showStartMenu = !showStartMenu;
     }
-    $: {
+
+    function handleColorChange(event: Event) {
+        const input = event.target as HTMLInputElement;
+        const newColor = input.value;
+        colorStore.set(newColor);
+        localStorage.setItem("color", newColor);
+    }
+
+    onMount(() => {
+        const localColor = localStorage.getItem("color");
+        if (localColor) color = localColor;
         colorStore.set(color);
-        // localStorage.setItem('color', color);
-    };
+    })
 </script>
 
 <div class="taskbar">
@@ -117,7 +123,7 @@
                         c4.498,0.499,8.523,2.717,11.334,6.244C268.209,163.697,269.472,168.114,268.955,172.602z"/>
                 </g>
             </svg>
-            <input class="hidden" name="color" type="color" bind:value={color}/>
+            <input class="hidden" name="color" type="color" on:input={handleColorChange} bind:value={color}/>
         </label>
         <Clock/>
     </div>

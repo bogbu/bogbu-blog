@@ -13,7 +13,6 @@
 </script>
 
 <div class="app flex-col md:flex-row flex gap-3 relative p-3 md:p-10">
-
     <Header/>
     <main style="scrollbar-color: {$colorStore} {$colorStore}; scrollbar-arrow-color: {$colorStore};">
         {#if $showContent}

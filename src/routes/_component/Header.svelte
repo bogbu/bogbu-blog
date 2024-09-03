@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {showProfile, showWeather, showMusic, toggleShowWeather} from "$lib/store/showContentStore";
+    import {showProfile, showWeather, showMusic, toggleShowWeather, toggleShowMusic} from "$lib/store/showContentStore";
     import UserProfile from "./UserProfile.svelte";
     import WindowFrame from "./WindowFrame.svelte";
     import Sky from "./lottie/Sky.svelte";
@@ -10,22 +10,20 @@
     {#if $showProfile}
         <UserProfile/>
     {/if}
-    {#if $showMusic}
-        <WindowFrame>
-            <div class="w-[200px] h-[200px]">
-                <Music/>
+    <!--{#if $showMusic}-->
+    <WindowFrame title="Music.svelte" className={$showMusic ? "" : "hidden"} onHandleClosed={toggleShowMusic}>
+        <div class="w-[200px] h-[200px]">
+            <Music/>
+        </div>
+    </WindowFrame>
+    <!--{/if}-->
+    <WindowFrame title="Weather.svelte" className={$showWeather ? "":"hidden"} onHandleClosed={toggleShowWeather}>
+        <div class="overflow-hidden w-[200px] h-[200px] flex items-center">
+            <div>
+                <Sky/>
             </div>
-        </WindowFrame>
-    {/if}
-    {#if $showWeather}
-        <WindowFrame onHandleClosed={toggleShowWeather}>
-            <div class="overflow-hidden w-[200px] h-[200px] flex items-center">
-                <div>
-                    <Sky/>
-                </div>
-            </div>
-        </WindowFrame>
-    {/if}
+        </div>
+    </WindowFrame>
 
 </header>
 

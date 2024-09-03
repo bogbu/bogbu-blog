@@ -1,8 +1,8 @@
 <script lang="ts">
     import {colorStore} from "$lib/store/colorStore";
-
+    export let title = "";
     let content_option = "";
-    let className = "";
+    export let className = "";
     export let onHandleClosed = () => {
         // header_option = 'none';
     }
@@ -16,10 +16,13 @@
 
 <section class={`window--frame ${className}`}>
     <div class="window--frame__header" style="background: {$colorStore}">
-        <div class="window--frame__header__button">
-            <button on:click={onHandleMinimization} class="minus-box"></button>
-            <button on:click={onHandleMaximize} class="square-box"></button>
-            <button on:click={onHandleClosed} class="cross-box"></button>
+        <div class="flex items-start justify-between">
+            <span class="ml-[5px]">{title}</span>
+            <div class="window--frame__header__button">
+                <button on:click={onHandleMinimization} class="minus-box"></button>
+                <button on:click={onHandleMaximize} class="square-box"></button>
+                <button on:click={onHandleClosed} class="cross-box"></button>
+            </div>
         </div>
         <div class={`window--frame__content max-h-[300px] md:max-h-[600px] ${content_option}`}>
             <slot/>

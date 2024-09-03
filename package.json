@@ -48,6 +48,7 @@
 		"axios": "^1.7.7",
 		"howler": "^2.2.4",
 		"lottie-web": "^5.12.2",
+		"marked": "^14.1.0",
 		"svelte-preprocess": "^5.1.4"
 	}
 }

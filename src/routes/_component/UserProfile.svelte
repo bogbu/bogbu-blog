@@ -11,7 +11,7 @@
     })
 </script>
 
-<WindowFrame onHandleClosed={toggleShowProfile}>
+<WindowFrame title="User.svelte" onHandleClosed={toggleShowProfile}>
     <article class="user--profile">
         {#if user.id === ""}
             <p>로그인이 필요합니다.</p>

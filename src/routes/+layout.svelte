@@ -6,7 +6,7 @@
     import {getUser} from "$lib/auth";
     import TaskBar from "./_component/TaskBar.svelte";
     import {showContent} from "$lib/store/showContentStore";
-
+    import {colorStore} from "$lib/store/colorStore";
     onMount(() => {
         getUser();
     });
@@ -15,7 +15,7 @@
 <div class="app flex-col md:flex-row flex gap-3 relative p-3 md:p-10">
 
     <Header/>
-    <main>
+    <main style="scrollbar-color: {$colorStore} {$colorStore}; scrollbar-arrow-color: {$colorStore};">
         {#if $showContent}
             <slot/>
         {/if}
@@ -40,12 +40,12 @@
   /* Custom scrollbar styles for Firefox */
   * {
     scrollbar-width: thin;
-    scrollbar-color: $secondary-color $secondary-color;
-    scrollbar-arrow-color: $secondary-color;
+    //scrollbar-color: $secondary-color $secondary-color;
+    //scrollbar-arrow-color: $secondary-color;
     transition: 0.2s;
   }
 
   *:hover {
-    scrollbar-color: #fff $secondary-color;
+    //scrollbar-color: #fff $secondary-color;
   }
 </style>

@@ -3,13 +3,15 @@
         showProfile,
         showContent,
         showWeather,
+        showMusic,
         toggleShowContent,
         toggleShowProfile,
-        toggleShowWeather
+        toggleShowWeather, toggleShowMusic
     } from "$lib/store/showContentStore";
     import StartMenu from "./StartMenu.svelte";
     import Clock from "./clock/Clock.svelte";
     import {colorStore} from "$lib/store/colorStore";
+    import {onMount} from "svelte";
 
     let showStartMenu = false;
     let color = "#fff";
@@ -19,11 +21,15 @@
     const toggleStartMenu = () => {
         showStartMenu = !showStartMenu;
     }
-    $: colorStore.set(color);
+    $: {
+        colorStore.set(color);
+        // localStorage.setItem('color', color);
+    };
 </script>
 
 <div class="taskbar">
-    <button class="start-button" on:click={toggleStartMenu} style="background-color: {showStartMenu ? color : '#c0c0c0'};">
+    <button class="start-button" on:click={toggleStartMenu}
+            style="background-color: {showStartMenu ? color : '#c0c0c0'};">
         <svg class="windows-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
             <path fill="#F25022" d="M6 6h18v18H6z"/>
             <path fill="#7FBA00" d="M24 6h18v18H24z"/>
@@ -50,6 +56,12 @@
                         </path>
                     </g>
                 </g>
+            </svg>
+        </button>
+        <button on:click={toggleShowMusic} class:active={$showMusic}>
+            <svg width="24px" height="24px" viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg" xml:space="preserve">
+                <path fill="#000000" fill-opacity="1" stroke-linejoin="round"
+                      d="M 37.75,19L 38.25,19C 38.25,19 57,19 57,39C 57,48 55,51 54,52C 54,52 51,54 51.9999,51.25C 51.9999,48.9362 53,44 53,44C 53,44 54,44 54,39C 54,33 50,22.5 39,22.5L 37,22.5C 26,22.5 22,33 22,39C 22,44 23,44 23,44C 23,44 24.0001,48.9362 24.0001,51.25C 25,54 22,52 22,52C 21,51 19,48 19,39C 19,19 37.75,19 37.75,19 Z M 26.5533,39.1655C 28.194,38.9349 29.711,40.0781 29.9416,41.7188L 31.4725,52.6117C 31.7031,54.2524 30.56,55.7694 28.9192,56C 27.2785,56.2306 25.2615,55.0875 25.0309,53.4467L 23.5,42.5538C 23.2694,40.9131 24.9126,39.3961 26.5533,39.1655 Z M 49.4467,39.1655C 51.0874,39.3961 52.7306,40.9131 52.5,42.5538L 50.9691,53.4467C 50.7385,55.0875 48.7215,56.2306 47.0808,56C 45.44,55.7694 44.2969,54.2524 44.5275,52.6117L 46.0584,41.7188C 46.289,40.0781 47.806,38.9349 49.4467,39.1655 Z "/>
             </svg>
         </button>
         <button class="content" on:click={toggleShowContent} class:active={$showContent}>Internet Explorer</button>

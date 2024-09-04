@@ -1,28 +1,22 @@
 <script lang="ts">
     import UserStore from "$lib/store/user";
-    import type {User} from "@supabase/supabase-js";
     import {google, logout} from "$lib/auth";
     import WindowFrame from "./WindowFrame.svelte";
     import {toggleShowProfile} from "$lib/store/showContentStore";
-
-    let user: User;
-    UserStore.subscribe(value => {
-        user = value;
-    })
 </script>
 
 <WindowFrame title="User.svelte" onHandleClosed={toggleShowProfile}>
     <article class="user--profile">
-        {#if user.id === ""}
+        {#if $UserStore.id === ""}
             <p>로그인이 필요합니다.</p>
             <button on:click={google}>
                 구글로 로그인
             </button>
         {:else}
             <div class="user--profile__avatar">
-                <img src={user.user_metadata.avatar_url} alt=""/>
+                <img src={$UserStore.user_metadata.avatar_url} alt=""/>
             </div>
-            <p>{user.user_metadata.name} 님</p>
+            <p>{$UserStore.user_metadata.name} 님</p>
 <!--            <p>{user.email}</p>-->
             <button on:click={logout}>
                 로그아웃

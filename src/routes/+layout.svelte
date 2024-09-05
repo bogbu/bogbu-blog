@@ -8,10 +8,10 @@
     import {showContent} from "$lib/store/showContentStore";
     import {colorStore} from "$lib/store/colorStore";
     import NoteList from "./_component/NoteList.svelte";
-    import type {Note} from "$lib/types/Components";
-    import {fetchNote, postNote, putNote} from "$lib/post";
+    import type {Note, NoteWithId} from "$lib/types/Components";
+    import {deleteNote, fetchNote, postNote, putNote} from "$lib/post";
 
-    let noteList: Note[];
+    let noteList: NoteWithId[];
     let loading = false;
     const addNewNote = async (note: Note) => {
         let newNote: Note = {...note};
@@ -38,7 +38,7 @@
             console.error("Error editing note:", error);
         }
     }
-    const deleteNote = async (id : string) => {
+    const deleteItem = async (id : string) => {
         if(loading) return;
         loading = true;
         try {
@@ -63,11 +63,9 @@
         {#if $showContent}
             <slot/>
         {/if}
-        <!--{loading}-->
-<!--        <button class="relative z-50" on:click={addNewNote} >test</button>-->
     </main>
     <TaskBar/>
-    <NoteList list={noteList} {editNote} {addNewNote}/>
+    <NoteList list={noteList} {editNote} {addNewNote} deleteNote={deleteItem}/>
 </div>
 
 <style lang="scss">

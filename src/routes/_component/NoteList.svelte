@@ -5,6 +5,7 @@
 
     export let list: Note[] = [];
     export let addNewNote: (note: Note)  => void;
+    export let deleteNote: (id: string) => void;
     let newNote: Note = {
         title: "",
         content: "",
@@ -18,7 +19,7 @@
 
 <article class="note-list w-full h-[100vh] absolute z-0 top-0 left-0 {$showEditNote ? 'edit' : ''}">
     {#each list as note}
-        <NoteLayout {note} {editNote}/>
+        <NoteLayout {note} {editNote} {deleteNote}/>
     {/each}
 
     {#if $showEditNote}

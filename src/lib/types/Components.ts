@@ -12,4 +12,6 @@ export interface Note {
     x: number;
     y: number;
 }
-
+export interface NoteWithId extends Note {
+    id: string;
+}

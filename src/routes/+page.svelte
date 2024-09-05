@@ -1,50 +1,42 @@
 <script lang="ts">
-    import {mockList} from "$lib/mock/mockList";
-    import WindowFrame from "./_component/WindowFrame.svelte";
-    import DragStart from "$lib/utils/draggable/DragStart.svelte";
-    import {dragStart, drop} from "$lib/utils/draggable/dnd";
-    import {getPost} from "$lib/post";
     import type {Posts} from "$lib/types/Posts";
+    import WindowFrameLayout from "./_component/WindowFrameLayout.svelte";
     import {onMount} from "svelte";
-    let posts : Posts[];
-    const hovering = (e: { currentTarget: (EventTarget & HTMLElement) }) => {
-        console.log(e, "hovering");
-        e.currentTarget.style.backgroundColor = "red";
-    }
-    const hoveringOut = (e: { currentTarget: (EventTarget & HTMLElement) }) => {
-        console.log(e, "hoveringOut");
-        e.currentTarget.style.backgroundColor = "transparent";
-    }
+    import {getPost} from "$lib/post";
+    import BlogList from "./_component/BlogList.svelte";
+    import SNSList from "./_component/SNSList.svelte";
+    import NoteLayout from "./_component/NoteLayout.svelte";
+    import NoteList from "./_component/NoteList.svelte";
+
+    let posts: Posts[];
+    let isLoading: boolean = false;
     const getPosts = async () => {
         const res = await getPost();
-        // posts
+        return res;
     }
-    onMount(() => {
-        getPosts();
-    });
+    onMount(async () => {
+        isLoading = true;
+        posts = await getPosts();
+        isLoading = false;
+    })
 </script>
 
 <svelte:head>
-    <title>drag and drop</title>
+    <title>bogbu</title>
     <meta name="description" content="Svelte demo app"/>
 </svelte:head>
-
-<section class="flex">
-    <WindowFrame>
-        <article class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-            {#each mockList as item, i}
-                <div draggable="true" role="listitem" class="bg-white shadow-md p-4 min-h-[250px] rounded-lg"
-                     on:dragover={(e)=>{e.preventDefault();  "return false"}} on:dragleave={(e)=>{e.preventDefault; hoveringOut(e)}}
-                     on:dragenter={(e)=>{hovering(e);}} on:drop={(e)=>{e.preventDefault;  console.log(e,"e"); drop(e); }}
-                    on:dragstart={(e)=>{dragStart({currentTarget: e.currentTarget, dataTransfer : e.dataTransfer})}}
-                >
-                    {@html item}
-                </div>
-            {/each}
-        </article>
-    </WindowFrame>
-</section>
-
+<WindowFrameLayout loading={isLoading}>
+    <div class="w-full gap-3 flex items-start justify-between">
+        <div class="flex-1">
+            <SNSList/>
+        </div>
+        {#if posts}
+            <BlogList {posts}/>
+        {:else}
+            <p>loading...</p>
+        {/if}
+    </div>
+</WindowFrameLayout>
 <style lang="scss">
 
 </style>

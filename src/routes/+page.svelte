@@ -5,6 +5,8 @@
     import {getPost} from "$lib/post";
     import BlogList from "./_component/BlogList.svelte";
     import SNSList from "./_component/SNSList.svelte";
+    import NoteLayout from "./_component/NoteLayout.svelte";
+    import NoteList from "./_component/NoteList.svelte";
 
     let posts: Posts[];
     let isLoading: boolean = false;
@@ -35,7 +37,6 @@
         {/if}
     </div>
 </WindowFrameLayout>
-
 <style lang="scss">
 
 </style>

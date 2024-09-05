@@ -1,5 +1,8 @@
 import {supabase} from "../supabase";
 import type {Posts} from "$lib/types/Posts";
+import type {Note} from "$lib/types/Components";
+import UserStore from "$lib/store/user";
+import {get} from "svelte/store";
 
 export const getPost = async (id?: string): Promise<Posts[]> => {
     let query = supabase.from('blog').select('*').order('created_at', {ascending: false});
@@ -28,4 +31,42 @@ export const fetchFiles = async (bucket: string) => {
         ...file,
         url: `${import.meta.env.VITE_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/${file.name}`
     }));
+}
+
+export const fetchNote = async (id?: string): Promise<Note[]> => {
+    let query = supabase.from('note').select('*').order('created_at', {ascending: false});
+
+    if (id) {
+        query = query.eq('id', id);
+    }
+
+    const {data, error} = await query.returns<Note[]>();
+
+    if (error) {
+        console.error('Error fetching posts:', error);
+        return [];
+    }
+
+    return data;
+}
+
+export const postNote = async (note: Note) => {
+    let newNote = {...note};
+    const email = get(UserStore).email;
+    if(email) {
+        newNote.email =email;
+        const {data, error} = await supabase.from('note').insert([newNote]);
+        if (error) {
+            throw error;
+        }
+        return data;
+    }
+}
+
+export const putNote = async (note: Note) =>{
+    const {data, error} = await supabase.from('note').upsert([note]);
+    if (error) {
+        throw error;
+    }
+    return data;
 }

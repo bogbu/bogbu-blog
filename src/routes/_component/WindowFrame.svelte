@@ -39,6 +39,8 @@
     overflow: hidden;
     //margin: 10px;
     width: 100%;
+    position: relative;
+    z-index: 3;
 
     .window--frame__header {
       display: flex;

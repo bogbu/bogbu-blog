@@ -1,25 +1,34 @@
 <!-- src/routes/_component/StartMenu.svelte -->
 <script lang="ts">
     export let visible: boolean;
+    interface StartMenuList {
+        name : string,
+        url : string
+    }
+    const startMenuList : StartMenuList[] = [
+        {name: "Profiles", url: "/profiles"},
+        {name: "Guestbook", url: "/guestBook"},
+        {name: "Portfolio", url: "/portfolio"},
+    ]
 </script>
 
 <div class:visible={visible} class="start-menu">
     <ul>
-        <li>Programs</li>
-        <li>Documents</li>
-        <li>Settings</li>
-        <li>Find</li>
-        <li>Help</li>
-        <li>Run...</li>
-        <li>Shut Down...</li>
+        {#each startMenuList as item}
+            <li>
+                <a href={item.url}>
+                    {item.name}
+                </a>
+            </li>
+        {/each}
     </ul>
 </div>
 
 <style lang="scss">
   .start-menu {
     position: absolute;
-    bottom: 40px;
-    left: 0;
+    bottom: 38px;
+    left: -2px;
     width: 200px;
     background-color: #c0c0c0;
     border: 2px solid #808080;

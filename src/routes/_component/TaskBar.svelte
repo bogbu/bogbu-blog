@@ -4,14 +4,16 @@
         showContent,
         showWeather,
         showMusic,
+        showEditNote,
         toggleShowContent,
         toggleShowProfile,
-        toggleShowWeather, toggleShowMusic
+        toggleShowWeather, toggleShowMusic, toggleEditNote
     } from "$lib/store/showContentStore";
     import StartMenu from "./StartMenu.svelte";
     import Clock from "./clock/Clock.svelte";
     import {colorStore} from "$lib/store/colorStore";
     import {onMount} from "svelte";
+    import {get} from "svelte/store";
 
     let showStartMenu = false;
     let color = "#fff";
@@ -19,13 +21,26 @@
         showStartMenu = !showStartMenu;
     }
 
-    function handleColorChange(event: Event) {
+    const handleColorChange = (event: Event) => {
         const input = event.target as HTMLInputElement;
         const newColor = input.value;
         colorStore.set(newColor);
         localStorage.setItem("color", newColor);
     }
-
+    const handleNote = () => {
+        toggleEditNote();
+        if(get(showEditNote)) {
+            showProfile.set(false);
+            showContent.set(false);
+            showWeather.set(false);
+            showMusic.set(false);
+        } else {
+            showProfile.set(true);
+            showContent.set(true);
+            showWeather.set(true);
+            showMusic.set(true);
+        }
+    }
     onMount(() => {
         const localColor = localStorage.getItem("color");
         if (localColor) color = localColor;
@@ -70,6 +85,7 @@
                       d="M 37.75,19L 38.25,19C 38.25,19 57,19 57,39C 57,48 55,51 54,52C 54,52 51,54 51.9999,51.25C 51.9999,48.9362 53,44 53,44C 53,44 54,44 54,39C 54,33 50,22.5 39,22.5L 37,22.5C 26,22.5 22,33 22,39C 22,44 23,44 23,44C 23,44 24.0001,48.9362 24.0001,51.25C 25,54 22,52 22,52C 21,51 19,48 19,39C 19,19 37.75,19 37.75,19 Z M 26.5533,39.1655C 28.194,38.9349 29.711,40.0781 29.9416,41.7188L 31.4725,52.6117C 31.7031,54.2524 30.56,55.7694 28.9192,56C 27.2785,56.2306 25.2615,55.0875 25.0309,53.4467L 23.5,42.5538C 23.2694,40.9131 24.9126,39.3961 26.5533,39.1655 Z M 49.4467,39.1655C 51.0874,39.3961 52.7306,40.9131 52.5,42.5538L 50.9691,53.4467C 50.7385,55.0875 48.7215,56.2306 47.0808,56C 45.44,55.7694 44.2969,54.2524 44.5275,52.6117L 46.0584,41.7188C 46.289,40.0781 47.806,38.9349 49.4467,39.1655 Z "/>
             </svg>
         </button>
+        <button class="content"  on:click={handleNote} class:active={$showEditNote}>Add New Note</button>
         <button class="content" on:click={toggleShowContent} class:active={$showContent}>Internet Explorer</button>
     </div>
     <div class="system-tray">
@@ -137,6 +153,7 @@
     left: 0;
     display: flex;
     align-items: center;
+    z-index: 2;
     //gap: 10px;
     justify-content: space-between;
     background-color: #c0c0c0;

@@ -13,6 +13,7 @@ export const google = async () => {
         },
     });
 }
+
 export const getUser = async () => {
     const {data, error} = await supabase.auth.getUser();
     if(data.user) UserStore.set(data.user);

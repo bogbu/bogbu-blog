@@ -1,9 +1,9 @@
 <script lang="ts">
     import NoteLayout from "./NoteLayout.svelte";
-    import type {Note} from "$lib/types/Components";
+    import type {Note, NoteWithId} from "$lib/types/Components";
     import {showEditNote} from "$lib/store/showContentStore";
 
-    export let list: Note[] = [];
+    export let list: NoteWithId[] = [];
     export let addNewNote: (note: Note)  => void;
     export let deleteNote: (id: string) => void;
     let newNote: Note = {

@@ -12,7 +12,7 @@
     {/if}
     <!--{#if $showMusic}-->
     <WindowFrame title="Music.svelte" className={$showMusic ? "" : "hidden"} onHandleClosed={toggleShowMusic}>
-        <div class="w-[200px] h-[200px]">
+        <div class="w-full h-[200px]">
             <Music/>
         </div>
     </WindowFrame>

@@ -10,6 +10,7 @@
     import NoteList from "./_component/NoteList.svelte";
     import type {Note, NoteWithId} from "$lib/types/Components";
     import {deleteNote, fetchNote, postNote, putNote} from "$lib/post";
+    import Alert from "./_component/Alert.svelte";
 
     let noteList: NoteWithId[];
     let loading = false;
@@ -30,7 +31,6 @@
         const newNote: Note = {...note};
         try {
             const data = await putNote(newNote);
-            console.log(data,"data");
             const note = await fetchNote();
             loading = false;
             if (note) noteList = note;
@@ -66,6 +66,7 @@
     </main>
     <TaskBar/>
     <NoteList list={noteList} {editNote} {addNewNote} deleteNote={deleteItem}/>
+    <Alert/>
 </div>
 
 <style lang="scss">
